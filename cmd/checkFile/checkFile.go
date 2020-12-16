@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/d24wang/go-file-checker/util"
 )
@@ -10,8 +11,9 @@ import (
 var badLines = []*badLine{}
 
 func main() {
+	prog := filepath.Base(os.Args[0])
 	if len(os.Args) < 2 {
-		fmt.Printf("%s file", os.Args[0])
+		fmt.Printf("Usage: %s file", prog)
 		os.Exit(1)
 	}
 

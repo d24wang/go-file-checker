@@ -9,12 +9,12 @@ func ValidLine(raw []byte) (bool, int) {
 	pos := 1
 
 	for len(raw) > 0 {
-		r, size := utf8.DecodeRune(raw)
-		if utf8.RuneError == r {
+		if r, size := utf8.DecodeRune(raw); utf8.RuneError != r {
+			raw = raw[size:]
+			pos += size
+		} else {
 			return false, pos
 		}
-		raw = raw[size:]
-		pos += size
 	}
 	return true, 0
 }
